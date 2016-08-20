@@ -1,0 +1,23 @@
+<ion-view title="login" id="page1">
+    <ion-content padding="true" class="has-header">
+        <h3 id="login-heading1" style="color:#000000;text-align:center;">Registrar</h3>
+        <form id="login-form1" class="list ">
+            <label class="item item-input " id="login-input1">
+                <span class="input-label">Usuario</span>
+                <input type="text" placeholder="" ng-model="usuario">
+            </label>
+            <label class="item item-input " id="login-input2">
+                <span class="input-label">Password</span>
+                <input type="password" placeholder="">
+            </label>
+        </form>
+        <a ui-sref="bienvenido" id="login-button1" class=" button button-positive  button-block ">Ingresar</a>
+       <!-- <button id="login-button2" class=" button button-positive  button-block ">Cambiar password</button>-->
+        
+        <a  ui-sref="forgotpassword" id="login-button2" class=" button button-positive  button-block ">Cambiar Password</a>
+       
+        
+        
+        
+    </ion-content>
+</ion-view>

@@ -1,0 +1,21 @@
+<ion-view title="Registro" id="page1">
+    <ion-content padding="true" class="has-header">
+        <div ng-controller="registroCtrl">
+        <h3 id="registro-heading1" style="color:#000000;text-align:center;">Ingresar</h3>
+        <form id="registro-form2" class="list ">
+            <label class="item item-input " id="registro-input2">
+                <span class="input-label">Usuario</span>
+                <input type="text" placeholder="" ng-model="userid">
+            </label>
+            <label class="item item-input " id="registro-input3">
+                <span class="input-label">Contraseña</span>
+                <input type="password" placeholder=""  >
+            </label>
+        </form>
+        <button id="registro-button1" ng-click="getRegister()" style="border-radius:50px 50px 50px 50px;" class=" button button-positive  button-block button-outline ">Registrar</button>
+        <div>
+            <a href="#">Términos y Condiciones</a>
+        </div>
+        </div>
+    </ion-content>
+</ion-view>

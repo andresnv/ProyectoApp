@@ -1,0 +1,13 @@
+<ion-view title="Product Detail" id="page5">
+    <ion-content padding="true" class="has-header">
+        <ion-list id="productDetail-list4">
+            <ion-item id="productDetail-list-item10">{{data_product.name}}</ion-item>
+            <ion-item id="productDetail-list-item10">{{data_product.type}}</ion-item>
+            <ion-item id="productDetail-list-item10">{{data_product.quantity}}</ion-item>
+            <ion-item id="productDetail-list-item10">{{data_product.price}}</ion-item>
+            <ion-item id="productDetail-list-item10">{{data_product.id}}</ion-item>
+        </ion-list>
+         <a href="#/side-menu21/page6/{{ data_product.id }}" id="page-button2" class=" button button-positive  button-block " >Editar</a>
+        <button id="page-button1" class=" button button-positive  button-block " ng-click="getDeleteProduct()">Eliminar</button>
+    </ion-content>
+</ion-view>

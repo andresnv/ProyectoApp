@@ -1,0 +1,10 @@
+<ion-view title="Productos" id="page4">
+    <ion-content padding="true" class="has-header">
+        <ion-list id="productos-list3">
+            <!--<ion-item id="productos-list-item7" ng-repeat="item in list">{{item.name}}</ion-item>-->
+            <a class="item" ng-repeat="product in list" href="#/side-menu21/page5/{{ product.id }}">{{ product.name }}</a>
+        </ion-list>
+        
+        <a  ui-sref="addproducto" id="add-button2" class=" button button-positive  button-block ">Agregar Producto</a>
+    </ion-content>
+</ion-view>

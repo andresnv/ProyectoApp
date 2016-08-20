@@ -1,0 +1,25 @@
+<ion-view title="Product Detail" id="page6">
+    <ion-content padding="true" class="has-header">
+         <label class="item item-input " id="page-input1">
+                <span class="input-label">Nombre</span>
+                <input type="text" placeholder="" value='{{data_product.name}}'>
+            </label>
+            <label class="item item-input " id="page-input2">
+                <span class="input-label">Tipo de Producto</span>
+                <input type="text" placeholder="" value='{{data_product.type}}'>
+            </label>
+            <label class="item item-input " id="page-input3">
+                <span class="input-label">Cantidad</span>
+                <input type="text" placeholder="" value='{{data_product.quantity}}'>
+            </label>
+            <label class="item item-input " id="page-input4">
+                <span class="input-label">Precio</span>
+                <input type="text" placeholder="" value='{{data_product.price}}'>
+            </label>
+            <label class="item item-input " id="page-input5">
+                <span class="input-label">id: {{data_product.id}}</span>
+            </label>
+        <button id="page-button1" class=" button button-positive  button-block " ng-click="EditProduct()">Editar</button>
+        
+    </ion-content>
+</ion-view>
