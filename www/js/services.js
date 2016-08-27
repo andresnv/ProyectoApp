@@ -51,7 +51,20 @@ angular.module('app.services', ['ngResource'])
 
 
 .service('userService', ['$resource', function($resource){
-	this.signup = $resource('http://private-bcbaa-productapp.apiary-mock.com/user/sign-up');	
+	//this.signup = $resource('http://private-bcbaa-productapp.apiary-mock.com/user/sign-up');	
+	this.signup = $resource('http://138.68.0.83:7070/api/v1/user/sign-up',
+	{
+      update: {
+        method: 'POST',
+         interceptor:{
+            response: function (param) {
+                 var result = param.resource;
+                 result.$status =  param.status;
+                 return result;
+              }
+        }
+      }
+    });
 }])
 
 
