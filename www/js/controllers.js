@@ -214,8 +214,17 @@ function ($scope, $stateParams, productService, $cordovaDialogs) {
 			   console.log(buttonIndex);
 		     })
 	 }
+
+	 $scope.getDeleteProduct = function () {
+		 productService.item_delete.delete({id: $stateParams.id}, function(data){
+		   console.log(data.$status);	
+		 });
+		 $cordovaDialogs.confirm('Confirma eliminar el producto: ' +  $scope.data_product.name,  'Eliminar producto', ['ok','cancel'])
+		   .then(function (buttonIndex) {
+			   localStorage.setItem('confirm','Opcion seleccionada' + buttonIndex);
+		     })
+	  }
 }])
-   
 
 
 
