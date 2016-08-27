@@ -8,17 +8,14 @@
             </label>
             <label class="item item-input " id="login-input2">
                 <span class="input-label">Password</span>
-                <input type="password" placeholder="" id="fieldpass">
+                <input type="password" placeholder="" ng-model="password" id="fieldpass">
             </label>
         </form>
         <!--<a ui-sref="bienvenido" id="login-button1" class=" button button-positive  button-block ">Ingresar</a>-->
        <!-- <button id="login-button2" class=" button button-positive  button-block ">Cambiar password</button>-->
        <button id="login-button2" class=" button button-positive  button-block " ng-click="userLogin()">Ingresar</button>
         
-        <a  ui-sref="forgotpassword" id="login-button2" class=" button button-positive  button-block ">Cambiar Password</a>
-       
-        
-        
+        <a  ui-sref="forgotpassword" id="login-button2" class=" button button-positive  button-block ">Cambiar Password</a>         
         
     </ion-content>
 </ion-view>

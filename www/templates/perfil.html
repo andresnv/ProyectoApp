@@ -1,0 +1,16 @@
+<ion-view title="Perfil" id="page1">
+    <ion-content padding="true" class="has-header">
+        <ion-list id="perfil-list2">
+            <ion-item id="perfil-list-item5">{{email}}</ion-item>
+            <ion-item id="perfil-list-item6">{{firstname}}</ion-item>
+            <ion-item id="perfil-list-item7">{{lastname}}</ion-item>
+            <ion-item id="perfil-list-item8">{{phone}}</ion-item>
+        </ion-list>
+        <a ui-sref="menu.editarPerfil" id="perfil-button1" class=" button button-positive  button-block ">Editar</a>
+        <button id="perfil-button2" class=" button button-positive  button-block " ng-click="getSignOut()">Cerrar Sesión</button>
+        <a  ui-sref="forgotpassword" id="login-button2" class=" button button-positive  button-block ">Cambiar Password</a>   
+        <div>
+            <a href="#" ng-click="getDeleteAccount()">Eliminar Cuenta</a>
+        </div>
+    </ion-content>
+</ion-view>

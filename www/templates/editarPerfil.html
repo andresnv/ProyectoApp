@@ -1,0 +1,23 @@
+<ion-view title="Editar Perfil" id="page4">
+    <ion-content padding="true" class="has-header">
+        <form id="editarPerfil-form2" class="list ">
+            <label class="item item-input " id="editarPerfil-input3">
+                <span class="input-label">Nombres</span>
+                <input type="text" placeholder="" value="{{firstname}}" id="firstname">
+            </label>
+            <label class="item item-input " id="editarPerfil-input4">
+                <span class="input-label">Apellidos</span>
+                <input type="text" placeholder="" value="{{lastname}}" id="lastname">
+            </label>
+            <label class="item item-input " id="editarPerfil-input6">
+                <span class="input-label">Teléfono</span>
+                <input type="text" placeholder="" value="{{phone}}" id="phone">
+            </label>
+            <!--<label class="item item-input " id="editarPerfil-input7">
+                <span class="input-label">Password</span>
+                <input type="text" placeholder="">
+            </label>-->
+        </form>
+        <button id="editarPerfil-button4" class=" button button-positive  button-block " ng-click="EditPerfil()">Actualizar</button>
+    </ion-content>
+</ion-view>

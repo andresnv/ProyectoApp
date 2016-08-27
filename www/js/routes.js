@@ -99,9 +99,12 @@ angular.module('app.routes', [])
     views: {
       'side-menu21': {
         //templateUrl: 'templates/ingresoYORegistro.html',
-		templateUrl: 'templates/opciones.html',
-        //controller: 'ingresoYORegistroCtrl'
+		//controller: 'ingresoYORegistroCtrl'
+		
+		templateUrl: 'templates/opciones.html',        
 		controller: 'opcionesCtrl'
+		/*templateUrl: 'templates/ediciNPerfil.html',        
+		controller: 'ediciNPerfilCtrl'*/
       }
     }
   })
@@ -110,8 +113,8 @@ angular.module('app.routes', [])
     url: '/page3',
     views: {
       'side-menu21': {
-        templateUrl: 'templates/interaccionesConPerfil.html',
-        controller: 'interaccionesConPerfilCtrl'
+        templateUrl: 'templates/perfil.html',
+        controller: 'perfilCtrl'
       }
     }
   })
@@ -172,7 +175,15 @@ angular.module('app.routes', [])
       }
     
   })
-
+.state('menu.editarPerfil', {
+    url: '/EditPerfil',
+    views: {
+      'side-menu21': {
+        templateUrl: 'templates/editarPerfil.html',
+        controller: 'editarPerfilCtrl'
+      }
+    }
+  })
 
 //$urlRouterProvider.otherwise('/side-menu21/page4')
 $urlRouterProvider.otherwise('/side-menu21/page1_an')

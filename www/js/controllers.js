@@ -10,22 +10,19 @@ function ($scope, $stateParams, $cordovaDialogs, loginService) {
 		//$cordovaDialogs.alert($scope.usuario, 'Login usuario', 'Aceptar');		
 		
 		var data = {
-			"email": "test@teste.com",
-			"password": "543210"
+			"email": document.getElementById("Email").value,
+			"password": document.getElementById("NewPass").value
 		};
 		
 		
 		loginService.forgotpass.save(data, function(data){
-			$scope.data = data;
-			console.log($scope.data);
-			
-			/*if($scope.data.email==document.getElementById("fieldusr").value){
-				$cordovaDialogs.alert('Usuario autenticado', 'Login usuario', 'Aceptar');
+			$scope.data=data;
+			if($scope.data.email!='undefined'){
+				$cordovaDialogs.alert('Password Cambiado', 'Cambiar Password', 'Aceptar');
 			}
 			else{
-				$cordovaDialogs.alert('Datos de acceso no validos', 'Login Usuario', 'Aceptar');
-			}*/
-		
+				$cordovaDialogs.alert('Password No Cambiado', 'Cambiar Password', 'Aceptar');
+			}
 		});
 	}	
 	
@@ -49,6 +46,22 @@ function ($scope, $stateParams) {
 
 }])
 
+.controller('ediciNPerfilCtrl', ['$scope', '$stateParams', '$cordovaDialogs', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams, $cordovaDialogs) {
+		
+	
+		
+	
+	
+	$scope.EditarPerfil=function(){
+		$cordovaDialogs.confirm('Confirma el cambio de informacion?',  'Cambio de Informacion', ['Ok','Cancelar'])
+		   .then(function (buttonIndex) {
+			   //localStorage.setItem('nombres','nombres editados');
+		   })
+	};
+}])
 
 /********** Camilo **********/
 
@@ -56,41 +69,43 @@ function ($scope, $stateParams) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $cordovaDialogs, loginService) {
-     
-   
-  /* $scope.userLogin = function(){
-		loginService.item_detail.get({id: 7}, function(data){
-
-        $scope.item = data;
-
-        console.log($scope.item);
-    });
-	}*/
+     	
+	$scope.userLogin = function(_usuario, _password){				
 	
-	
-	$scope.userLogin = function(){
-		
-		
-		
 		//$cordovaDialogs.alert($scope.usuario, 'Login usuario', 'Aceptar');
 		
-		
 		var data = {
-			"email": "test@teste.com",
-			"password": "543210"
+			"email": document.getElementById("fieldusr").value,
+			"password": document.getElementById("fieldpass").value
 		};
 		
 		
 		loginService.signin.save(data, function(data){
 			$scope.data = data;
 			console.log($scope.data);
+			//console.log($scope.data.id);
 			
-			if($scope.data.email==document.getElementById("fieldusr").value){
+			if($scope.data.id!='undefined'){
+				localStorage.setItem('UsrId',$scope.data.id);
+				localStorage.setItem('UsrEmail',$scope.data.email);
+				localStorage.setItem('UsrFirstname',$scope.data.firstname);
+				localStorage.setItem('UsrLastname',$scope.data.lastname);
+				localStorage.setItem('UsrPhone',$scope.data.phone);
+				localStorage.setItem('UsrCookie',$scope.data.cookie);
+				
 				$cordovaDialogs.alert('Usuario autenticado', 'Login usuario', 'Aceptar');
 			}
 			else{
 				$cordovaDialogs.alert('Datos de acceso no validos', 'Login Usuario', 'Aceptar');
-			}		
+				
+			}
+			
+			/*if($scope.data.email==document.getElementById("fieldusr").value){
+				$cordovaDialogs.alert('Usuario autenticado', 'Login usuario', 'Aceptar');
+			}
+			else{
+				$cordovaDialogs.alert('Datos de acceso no validos', 'Login Usuario', 'Aceptar');
+			}*/
 		});
 	}   
 
@@ -183,8 +198,16 @@ function ($scope, $stateParams, productService, $cordovaDialogs) {
 	 });
 
 	 $scope.EditProduct = function () {
-		 productService.item_edit.update({id:$stateParams.id}, function(data){
-		  console.log(data.$status);
+		 var data = {
+			   "name" : $scope.data_product.name,
+			   "type" : $scope.data_product.type,
+			   "quantity" : $scope.data_product.quantity,
+			   "price" : $scope.data_product.price,
+			   "id" : $stateParams.id
+		   }
+		 productService.item_edit.update(data, function(data){
+		  console.log($scope.data_product.name);
+		 	  
 	 	});	
 		 $cordovaDialogs.alert('Producto editado: ' +  $scope.data_product.name,  'ok')
 		   .then(function (buttonIndex) {
@@ -192,6 +215,7 @@ function ($scope, $stateParams, productService, $cordovaDialogs) {
 		     })
 	 }
 }])
+   
 
 
 
@@ -250,7 +274,7 @@ function ($scope, $stateParams, productService, $cordovaDialogs) {
 
 
 $scope.getRegisterProduct = function(){
-  
+	  
   var data = {
         "name": $scope.name,
         "type": $scope.type,
@@ -258,16 +282,23 @@ $scope.getRegisterProduct = function(){
         "price": $scope.price
     };
 
-   
-	productService.item_create.save(data, function(data){
+   console.log($scope.data);
 
-        $scope.data = data;
-
-        console.log($scope.data);
-    });
 
 		$cordovaDialogs.confirm('Creando Producto', 'Confirma creación del producto ' + $scope.name , ['Ok','Cancel'])
 		    .then(function(buttonIndex) {
+		      // no button = 0, 'OK' = 1, 'Cancel' = 2
+		      var btnIndex = buttonIndex;
+              //localStorage.setItem('confirm','EL USUARIO SELECCIONO LA OPCION' + btnIndex);
+              if(btnIndex == 1)
+                {
+                    productService.item_create.save(data, function(data){
+
+                    $scope.data = data;
+
+                    console.log($scope.data);
+                });}
+            else{console.log('OPCION 2');}
 
     		});
 	};
@@ -338,4 +369,83 @@ function ($scope, $stateParams, productService, $cordovaDialogs) {
 		     })
 	  }
 
+}])
+
+.controller('perfilCtrl', ['$scope', '$stateParams', 'productService','$cordovaDialogs',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams, productService, $cordovaDialogs) {
+
+	$scope.email=localStorage.getItem('UsrEmail');	
+	$scope.firstname=localStorage.getItem('UsrFirstname');	
+	$scope.lastname=localStorage.getItem('UsrLastname');	
+	$scope.phone=localStorage.getItem('UsrPhone');	
+
+	$scope.getSignOut = function(){  
+  	$cordovaDialogs.confirm('Confirmar cerrar la sesion', 'Cerrar Sesion' , ['Ok','Cancel'])
+		.then(function(buttonIndex) {
+		  // no button = 0, 'OK' = 1, 'Cancel' = 2
+		  var btnIndex = buttonIndex;
+		  if(btnIndex == 1)
+		  {
+				productService.item_signout.save( $scope.item, function(data){
+					$scope.item = data;                        
+					console.log($scope.item);
+				});
+		  }
+		  else
+			console.log('OPCION 2');
+		});		
+	};
+
+
+    $scope.getDeleteAccount = function(){
+  
+  	$cordovaDialogs.confirm('Eliminación de Informacion', 'Eliminar Cuenta' , ['Ok','Cancel'])
+		.then(function(buttonIndex) {
+		  // no button = 0, 'OK' = 1, 'Cancel' = 2
+		  var btnIndex = buttonIndex;
+		  if(btnIndex == 1)
+		  {
+			console.log( $scope.item);
+			productService.item_deleteaccount.delete({email: $scope.item.email}, function(data){					
+				console.log('BORRO REGISTRO' + data.$status);
+			});
+		  }
+		  else
+			console.log('OPCION 2');
+		});		
+	};
+
+
+}])
+      
+.controller('editarPerfilCtrl', ['$scope', '$stateParams', 'editPerfilService', '$cordovaDialogs', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams, editPerfilService, $cordovaDialogs) {
+	
+	$scope.firstname=localStorage.getItem('UsrFirstname');	
+	$scope.lastname=localStorage.getItem('UsrLastname');	
+	$scope.phone=localStorage.getItem('UsrPhone');
+	
+	
+	 $scope.EditPerfil = function () {
+		 var data = {
+			   "firstname" : document.getElementById('firstname').value,
+			   "lastname" : document.getElementById('lastname').value,
+			   "phone" : document.getElementById('phone').value,
+			   "email" : localStorage.getItem('UsrEmail')
+		   }
+		   
+		 editPerfilService.profile_edit.update(data, function(data){		  
+		  $cordovaDialogs.alert('Informacion Editada',  'ok')
+		   .then(function (buttonIndex) {
+			   	localStorage.setItem('UsrFirstname', data.firstname);	
+				localStorage.setItem('UsrLastname', data.lastname);	
+				localStorage.setItem('UsrPhone', data.phone);			   
+		     })
+		 	  
+	 	});			 
+	 }
 }])
