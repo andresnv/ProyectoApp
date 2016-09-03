@@ -145,7 +145,7 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('productosCtrl', ['$scope', '$stateParams', 'productService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+/*.controller('productosCtrl', ['$scope', '$stateParams', 'productService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, productService) {
@@ -169,6 +169,46 @@ function ($scope, $stateParams, productService) {
 	  };
 		 
 }])
+*/
+
+
+
+
+.controller('productosCtrl', ['$scope', '$stateParams', 'productService', '$cordovaNetwork','$cordovaSQLite', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+// You can include any angular dependencies as parameters for this function
+// TIP: Access Route Parameters for your page via $stateParams.parameterName
+function ($scope, $stateParams, productService,$cordovaNetwork,$cordovaSQLite) {
+
+	var isOnline = $cordovaNetwork.isOnline()
+	if(isOnline == true)
+	{
+		productService.item_list.query(function(data){
+				$scope.list = data;
+				//console.log($scope.list);
+			});
+	}
+	else
+	{
+		// Consultar Tabla			
+
+		var db = $cordovaSQLite.openDB({ name: "ProductApp.db", location: "default" });
+		var query = "SELECT * FROM Products;";
+		$cordovaSQLite.execute(db, query, []).then(function(res){
+				var arraylist = [];
+				for(var i = 0; i<res.rows.length;i++)
+				{
+						arraylist.push(res.rows.item(i));
+				}
+				
+				$scope.list =arraylist;
+
+			}, function(err){
+				console.error(err);
+			});
+			
+	}
+}])
+
 
 .controller('productDetailCtrl', ['$scope', '$stateParams', 'productService', '$cordovaDialogs', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
@@ -451,7 +491,7 @@ function ($scope, $stateParams) {
 
 }])
    
-.controller('productosCtrl', ['$scope', '$stateParams', 'productService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+/*.controller('productosCtrl', ['$scope', '$stateParams', 'productService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, productService) {
@@ -460,7 +500,7 @@ function ($scope, $stateParams, productService) {
         	$scope.list = data;
         	//console.log($scope.list);
          });
-}])
+}])*/
 
 .controller('productDetailCtrl', ['$scope', '$stateParams', 'productService', '$cordovaDialogs', '$state', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
