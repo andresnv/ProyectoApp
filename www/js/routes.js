@@ -94,21 +94,31 @@ angular.module('app.routes', [])
     abstract:true
   })
 
-  .state('menu.ingresoYORegistro', {
+  /*.state('menu.ingresoYORegistro', {
     url: '/page1_an',
     views: {
       'side-menu21': {
         //templateUrl: 'templates/ingresoYORegistro.html',
 		//controller: 'ingresoYORegistroCtrl'
-		
 		templateUrl: 'templates/opciones.html',        
-		controller: 'opcionesCtrl'
-		/*templateUrl: 'templates/ediciNPerfil.html',        
-		controller: 'ediciNPerfilCtrl'*/
+		controller: 'opcionesCtrl'	
       }
     }
+  })*/
+  
+  .state('ingresoYORegistro', {
+	url: '/page1_an',
+    templateUrl: 'templates/opciones.html',        
+	controller: 'opcionesCtrl'	     
   })
-
+ 
+ .state('addproducto', {
+    url: '/page6',
+    templateUrl: 'templates/nuevoProducto.html',
+    controller: 'nuevoProductoCtrl'
+  })
+  
+  
   .state('menu.interaccionesConPerfil', {
     url: '/page3',
     views: {
@@ -136,15 +146,10 @@ angular.module('app.routes', [])
               templateUrl: 'templates/productDetail.html',
               controller: 'productDetailCtrl'
         }
-      }
-    
+      }    
   })
   
-  .state('addproducto', {
-    url: '/page6',
-    templateUrl: 'templates/nuevoProducto.html',
-    controller: 'nuevoProductoCtrl'
-  })
+  
   
   .state('bienvenido', {
     url: '/page2',
@@ -186,8 +191,8 @@ angular.module('app.routes', [])
   })
 
 //$urlRouterProvider.otherwise('/side-menu21/page4')
-$urlRouterProvider.otherwise('/side-menu21/page1_an')
+//$urlRouterProvider.otherwise('/side-menu21/page1_an')
+$urlRouterProvider.otherwise('/page1_an')
 
-  
 
 });
